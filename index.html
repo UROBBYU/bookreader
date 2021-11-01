@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Reader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <header>
+        <div id="upper-navbar">
+            <div id="left-navbar">
+                <div class="button" id="index" title="Головне меню">&#xe90d;</div>
+                <div class="button text" id="titles" title="На титульну сторінку">
+                    <div class="upper-text"></div>
+                    <div class="nether-text"></div>
+                </div>
+            </div>
+            <div id="right-navbar">
+                <div class="button" id="settings" title="Налаштування сторінки">&#xe992;</div>
+                <div class="button" id="theme-switch" title="Змінити тему">
+                    <div>&#xe903;</div>
+                    <div>&#xe902;</div>
+                    <div>&#xe923;</div>
+                </div>
+                <div class="button subdigit" id="inbox" title="Повідомлення">&#xe91d;</div>
+                <div class="button" id="profile" title="Профіль">&#xe910;</div>
+            </div>
+        </div>
+        <div id="nether-navbar">
+            <div class="button" id="chapter-left" title="Попередня сторінка">&#xf053;</div>
+            <div class="button text" id="chapter" title="Список сторінок"><span id="title"></span><span id="placeholder">Зміст</span></div>
+            <div class="button" id="chapter-right" title="Наступна сторінка">&#xf054;</div>
+        </div>
+    </header>
+    <main>
+        <div id="document"></div>
+        <div id="description">
+            <div class="left-col">
+                <div class="title"></div>
+                <div class="subtitle"></div>
+                <div class="author"></div>
+                <div class="genre"></div>
+                <div class="pair" data-key="Дата виходу:"></div>
+                <div class="pair" data-key="Розділів:"></div>
+                <div class="text"></div>
+                <div class="chapter-list"></div>
+            </div>
+            <div class="right-col">
+                <div class="picture">
+                    <img>
+                    <div class="likes"></div>
+                    <div class="controls">
+                        <div class="bell button">&#xe90b;</div>
+                        <div class="continue button"></div>
+                        <div class="mark button">&#xe909;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bookindex"></div>
+        <footer>
+            <div class="selector">
+                <div class="button selected">Коментарі</div>
+                <div class="button">Правки</div>
+            </div>
+            <div id="suggestions">
+                <div class="new-suggestion">
+                    <div class="text"></div>
+                    <textarea rows="3" placeholder="Коротко та зрозуміло опишіть що треба зробити з вказаним текстом" maxlength="2000" spellcheck="true"></textarea>
+                    <div class="send button">Підтвердити</div>
+                    <div class="cancel button">Відмінити</div>
+                </div>
+                <div class="load button">Завантажити</div>
+                <div class="suggestions-list"></div>
+            </div>
+            <div id="comments-block">
+                <div class="new-comment">
+                    <textarea rows="6" placeholder="Додати коментар" maxlength="2000" spellcheck="true"></textarea>
+                    <div class="controls">
+                        <div class="bold button" title="Виділення">&#xea62;</div>
+                        <div class="italic button" title="Курсив">&#xea64;</div>
+                        <div class="underline button" title="Підкреслений">&#xea63;</div>
+                        <div class="delete button" title="Закреслений">&#xea65;</div>
+                        <div class="spoiler button" title="Спойлер">&#xe911;</div>
+                        <div class="link button" title="Посилання" style="font-size:18px">&#xe91b;</div>
+                        <div class="send" title="Відправити">&#xe918;</div>
+                    </div>
+                </div>
+                <div class="load button">Завантажити</div>
+                <div class="comments-list"></div>
+            </div>
+        </footer>
+    </main>
+    <div id="upper-popup">
+        <div class="body">
+            <div class="quote button" title="Цитувати">&#xe900;</div>
+            <div class="suggest-edits button" title="Запропонувати правки">&#xe91f;</div>
+        </div>
+    </div>
+    <div id="overlay">
+        <div id="inbox-popup"></div>
+        <div id="upper-pad">
+            <div id="chapter-list"></div>
+            <div id="settings-page">
+                <div class="title">
+                    <span class="icon">&#xe994;</span>
+                    <span class="name">Налаштування</span>
+                </div>
+                <div class="list-item">
+                    <div class="title">
+                        <span class="icon">&#xe913;</span>
+                        <span class="name">Тема</span>
+                    </div>
+                    <div class="setting switch icons">
+                        <div id="theme-black" class="icon" style="background-color:black;color:white">&#xe902;</div>
+                        <div id="theme-white" class="icon" style="background-color:white;color:black">&#xe903;</div>
+                        <div id="theme-paper" class="icon" style="background-color:#ede1bf;color:black">&#xe923;</div>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="title">
+                        <span class="icon">&#xf07e;</span>
+                        <span class="name">Ширина сторінки</span>
+                    </div>
+                    <div class="setting switch">
+                        <div id="page-size-standard">Стандарт</div>
+                        <div id="page-size-50">50</div>
+                        <div id="page-size-80">80</div>
+                        <div id="page-size-100">100</div>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="title">
+                        <span class="icon">&#xf0db;</span>
+                        <span class="name">Поля</span>
+                    </div>
+                    <div class="setting switch">
+                        <div id="edges-small">Малі</div>
+                        <div id="edges-medium">Середні</div>
+                        <div id="edges-big">Великі</div>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="title">
+                        <span class="icon">&#xea5c;</span>
+                        <span class="name">Шрифт</span>
+                    </div>
+                    <div class="setting switch dynamic">
+                        <div id="font-noto" data-mini="Sans"><span>Noto Sans</span></div>
+                        <div id="font-roboto" data-mini="Roboto"><span>Roboto</span></div>
+                        <div id="font-philosopher" data-mini="Curved"><span>Philosopher</span></div>
+                        <div id="font-times" data-mini="Times"><span>Times New Roman</span></div>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="title">
+                        <span class="icon">&#xf031;</span>
+                        <span class="name">Розмір тексту</span>
+                    </div>
+                    <div class="setting digit">
+                        <div id="font-size-dec" class="icon">&#xf068;</div>
+                        <div id="font-size-val" data-step="1" data-min="8" data-max="64"></div>
+                        <div id="font-size-inc" class="icon">&#xf067;</div>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="title">
+                        <span class="icon">&#xea5f;</span>
+                        <span class="name">Висота рядків</span>
+                    </div>
+                    <div class="setting digit">
+                        <div id="line-height-dec" class="icon">&#xf068;</div>
+                        <div id="line-height-val" data-step="0.1" data-min="1" data-max="3"></div>
+                        <div id="line-height-inc" class="icon">&#xf067;</div>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="title">
+                        <span class="icon">&#xea73;</span>
+                        <span class="name">Інтервал між рядками</span>
+                    </div>
+                    <div class="setting digit">
+                        <div id="line-margin-dec" class="icon">&#xf068;</div>
+                        <div id="line-margin-val" data-step="1" data-min="1" data-max="3"></div>
+                        <div id="line-margin-inc" class="icon">&#xf067;</div>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="title">
+                        <span class="icon" style="transform:rotate(90deg)">&#xe919;</span>
+                        <span class="name">Відстань між літерами</span>
+                    </div>
+                    <div class="setting digit">
+                        <div id="letter-space-dec" class="icon">&#xf068;</div>
+                        <div id="letter-space-val" data-step="0.1" data-min="-2" data-max="2"></div>
+                        <div id="letter-space-inc" class="icon">&#xf067;</div>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="title">
+                        <span class="icon">&#xea7b;</span>
+                        <span class="name">Абзац</span>
+                    </div>
+                    <div class="setting switch icons">
+                        <div id="paragraph-off" class="icon">&#xea7c;</div>
+                        <div id="paragraph-on" class="icon">&#xea7b;</div>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="title">
+                        <span class="icon">&#xea7a;</span>
+                        <span class="name">Вирівнювання тексту</span>
+                    </div>
+                    <div class="setting switch icons">
+                        <div id="text-align-left" class="icon">&#xea77;</div>
+                        <div id="text-align-justify" class="icon">&#xea7a;</div>
+                    </div>
+                </div>
+            </div>
+            <div id="upper-pad-close" class="button">&#xf077;</div>
+        </div>
+        <div id="left-pad">
+            <div class="item button close">&#xf053;</div>
+            <div class="item button home">
+                <div class="icon">&#xe91a;</div>
+                <div class="title">На головну</div>
+            </div>
+            <div class="item button bookmarks">
+                <div class="icon">&#xe901;</div>
+                <div class="title">Закладки</div>
+            </div>
+            <div class="sub-panel disabled"></div>
+        </div>
+        <div id="message">
+            <div class="head">
+                <span class="icon"></span>
+                <span class="title"></span>
+                <span id="message-close" class="button">&times;</span>
+            </div>
+            <div class="message"></div>
+        </div>
+    </div>
+    <div id="loading-screen" style="display:none">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-500 -500 1000 1000" style="stroke:#f4f4f4;fill:#f4f4f4">
+                <g transform="matrix(4 0 0 4 0 0)">
+                    <path d="M42.42,48.99C42.42,48.99,445.575,-183.77,445.575,-183.77C445.575,-183.77,445.575,281.75,445.575,281.75C445.575,281.75,42.426,48.99,42.426,48.99C42.426,48.99,-360.726,281.75,-360.726,281.75C-360.726,281.75,-360.726,-183.77,-360.726,-183.77C-360.726,-183.77,42.42,48.99,42.42,48.99Z" transform="matrix(0 0.229846 -0.229846 0 11.260156 -9.750067)" fill="none" stroke-width="68.96" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path transform-origin="0 75.88" stroke="none" stroke-width="2">
+                        <animate attributeName="d" values="M-53.5,92.66L-53.5,92.66L53.5,92.66L53.5,92.66L-53.5,92.66Z;M-53.5,92.66L-0,0L-0,0L53.5,92.66L-53.5,92.66Z;M-53.5,92.66L0,0L0,0L53.5,92.66L-53.5,92.66" keyTimes="0;0.8;1" dur="2.5" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M-53.5,-92.66L0,0L53.5,-92.66L-53.5,-92.66Z" stroke="none" stroke-width="2">
+                        <animateTransform attributeName="transform" type="scale" values="1 1;0 0;0 0" keyTimes="0;0.8;1" dur="2.5" additive="sum" repeatCount="indefinite"/>
+                    </path>
+                    <animateTransform attributeName="transform" type="rotate" values="0;0;-16.7;196.7;180" keyTimes="0;0.68;0.74;0.93;1" calcMode="spline" keySplines="0 0 1 1;0.4 0.7 0.73 1;0.58 0 0.34 1;0.28 0.06 0.61 0.38" dur="2.5" additive="sum" repeatCount="indefinite"/>
+                </g>
+            </svg>
+            <div class="label">Будь-ласка зачекайте, ми збираємо для вас сайт</div>
+            <div class="progress">
+                <div class="bar"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
