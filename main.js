@@ -1,4 +1,7 @@
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js')
+if ('serviceWorker' in navigator) {
+    console.log(navigator.serviceWorker.register)
+    navigator.serviceWorker.register('/sw.js')
+}
 
 (async () => {
     //* Updates
