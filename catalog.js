@@ -51,7 +51,7 @@ const obj = {
                 </div>
                 <div class="overview collapsed">
                     <div class="description"></div>
-                    <img>
+                    <img crossorigin>
                     <div class="start">Читати</div>
                 </div>
                 <div class="gallery">
