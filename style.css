@@ -1094,10 +1094,10 @@ main > footer > .selector > .button.selected {
 	vertical-align: middle;
 }
 #suggestions > .suggestions-list > .suggestion > .name.administrator::before {
-	content: url('../hub/img/administrator.svg');
+	content: url('/img/administrator.svg');
 }
 #suggestions > .suggestions-list > .suggestion > .name.moderator::before {
-	content: url('../hub/img/moderator.svg');
+	content: url('/img/moderator.svg');
 }
 #comments-block .comment > .body > .name > span {
 	color: var(--shadow-color);
@@ -1264,13 +1264,13 @@ main > footer > .selector > .button.selected {
 	vertical-align: middle;
 }
 #comments-block .comment > .body > .name.administrator::before {
-	content: url('../hub/img/administrator.svg');
+	content: url('/img/administrator.svg');
 }
 #comments-block .comment > .body > .name.moderator::before {
-	content: url('../hub/img/moderator.svg');
+	content: url('/img/moderator.svg');
 }
 #comments-block .comment > .body > .name.premium::before {
-	content: url('../hub/img/premium.svg');
+	content: url('/img/premium.svg');
 }
 #comments-block .comment > .body > .name > span {
 	color: var(--shadow-color);
