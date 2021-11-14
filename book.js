@@ -166,7 +166,8 @@ const obj = {
 									urlParams.get('book'),
 									page[0],
 								]).onsuccess = (e) => {
-									pages.push(e.target.result.text)
+									if (e.target.result)
+										pages.push(e.target.result.text)
 									res()
 								}
 							})
