@@ -160,9 +160,8 @@ header > div > div {
 }
 #nether-navbar {
 	display: none;
-	margin-top: -50px;
 	margin-inline: auto;
-	padding-block: 5px;
+	padding: 0 5px 5px 5px;
 	justify-content: center;
 	font-family: custom-icons, sans-serif;
 	color: var(--nether-navbar-text-color);
@@ -173,23 +172,25 @@ header > div > div {
 	display: flex;
 }
 #chapter {
+	width: 100%;
 	font-size: 20px;
 	line-height: 38px !important;
 	margin-inline: 0;
 	overflow: hidden;
 	font-weight: 300;
-	max-width: 320px;
 }
 #chapter > span {
 	width: 100%;
 }
 #chapter-left {
-	margin-right: 0;
-	font-size: 18px;
+	margin-left: 10px;
+	padding-inline: 20px !important;
+	font-size: 20px;
 }
 #chapter-right {
-	margin-left: 0;
-	font-size: 18px;
+	margin-right: 10px;
+	padding-inline: 20px !important;
+	font-size: 20px;
 }
 #title {
 	white-space: nowrap;
@@ -1544,12 +1545,6 @@ main > footer > .selector > .button.selected {
 }
 
 @media (max-width: 800px) {
-	#title {
-		display: none;
-	}
-	#placeholder {
-		display: block;
-	}
 	.settings #settings-page {
 		display: block;
 		max-width: 300px;
@@ -1565,30 +1560,6 @@ main > footer > .selector > .button.selected {
 	.page-reader main {
 		padding-top: 95px;
 		height: calc(100vh - 95px);
-	}
-	#nether-navbar {
-		margin-top: 0;
-		padding: 0 5px 5px 5px;
-	}
-	#chapter {
-		width: 100%;
-		max-width: none;
-	}
-	#title {
-		display: block;
-	}
-	#placeholder {
-		display: none;
-	}
-	#chapter-left {
-		padding-inline: 20px !important;
-		margin-left: 10px;
-		font-size: 20px;
-	}
-	#chapter-right {
-		padding-inline: 20px !important;
-		margin-right: 10px;
-		font-size: 20px;
 	}
 }
 @media (max-width: 400px) {

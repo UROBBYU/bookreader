@@ -563,7 +563,7 @@ if ('serviceWorker' in navigator)
 
 	window.urlParams = new URLSearchParams(location.search)
 
-	window.delayTime = 2000
+	window.delayTime = 10000
 
 	const controller = new AbortController()
 	const loader = pageLoader()
@@ -1585,7 +1585,7 @@ if ('serviceWorker' in navigator)
 						encodeURIComponent(location)
 				})
 			} else {
-				profile = await (
+				let profile = await (
 					await mainLoader.add(
 						'profile',
 						fetch(
