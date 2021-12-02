@@ -564,7 +564,11 @@ if ('serviceWorker' in navigator)
 
 	window.urlParams = new URLSearchParams(location.search)
 
-	window.delayTime = 10000
+	if (localStorage.getItem('lastServerConnect') - Date.now() <= 60000)
+		window.delayTime = 1000
+	else {
+		window.delayTime = 10000
+	}
 
 	const controller = new AbortController()
 	const loader = pageLoader()
@@ -1860,6 +1864,9 @@ if ('serviceWorker' in navigator)
 			leftPadBookmarks.style.display = 'none'
 
 			mainLoader = pageLoader()
+
+			if (localStorage.getItem('lastServerConnect') - Date.now() > 60000)
+				localStorage.setItem('lastServerConnect', Date.now())
 		}
 
 		//* Splitting into three pages
