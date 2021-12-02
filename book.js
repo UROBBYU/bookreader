@@ -407,6 +407,8 @@ const obj = {
 
 			main.querySelector('footer').style.opacity = 1
 			document.body.classList.add('page-reader')
+			main.querySelector('footer').style.maxWidth =
+				doc.getBoundingClientRect().width + 'px'
 		})
 	},
 	unload: async () => {},

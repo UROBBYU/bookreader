@@ -215,6 +215,7 @@ if ('serviceWorker' in navigator)
 				doc.style.paddingInline = '50px'
 				select(edgesBig)
 		}
+		mainFooter.style.maxWidth = doc.getBoundingClientRect().width + 'px'
 		switch (settingsData.font) {
 			case 'noto':
 				doc.style.fontFamily = "'Noto Sans', Roboto, sans-serif"
@@ -553,7 +554,7 @@ if ('serviceWorker' in navigator)
 	const networkErr = (err) =>
 		showMessage(
 			'Помилка мережі',
-			"Неможливо встановити зв'язок з сервером:\n" + err,
+			"Неможливо встановити зв'язок з сервером:<br/>" + err,
 			'&#xe92b;'
 		)
 	const invalidAddr = () =>
@@ -568,42 +569,37 @@ if ('serviceWorker' in navigator)
 	const controller = new AbortController()
 	const loader = pageLoader()
 
-	loader.add(
-		'userId',
+	const fetches = [
 		fetch('https://server.urepo.com.ua:8443/userauth/check', {
 			credentials: 'include',
 			signal: controller.signal,
-		}).catch((err) => console.warn(err))
-	)
-	loader.add(
-		'bookList',
+		}).catch((err) => console.warn(err)),
 		fetch('https://server.urepo.com.ua:8443/books', {
 			credentials: 'include',
 			signal: controller.signal,
-		}).catch((err) => console.warn(err))
-	)
-	loader.add(
-		'messages',
+		}).catch((err) => console.warn(err)),
 		fetch('https://server.urepo.com.ua:8443/user/messages', {
 			credentials: 'include',
 			signal: controller.signal,
-		}).catch((err) => console.warn(err))
-	)
-	loader.add(
-		'bookmarks',
+		}).catch((err) => console.warn(err)),
 		fetch('https://server.urepo.com.ua:8443/user/bookmarks', {
 			credentials: 'include',
 			signal: controller.signal,
-		}).catch((err) => console.warn(err))
-	)
+		}).catch((err) => console.warn(err)),
+	]
+
+	Promise.any(fetches).then(() => clearTimeout(timerId))
+
+	loader.add('userId', fetches[0])
+	loader.add('bookList', fetches[1])
+	loader.add('messages', fetches[2])
+	loader.add('bookmarks', fetches[3])
 
 	const timerId = setTimeout(() => controller.abort(), delayTime)
 
 	// Page assembling
 
 	loader.release(async ({ userId, bookList, messages, bookmarks }) => {
-		clearTimeout(timerId)
-
 		window.serverActive = userId[0]?.ok
 
 		console.log(`Server is${serverActive ? '' : ' not'} active`)
@@ -615,6 +611,11 @@ if ('serviceWorker' in navigator)
 				messages = await messages[0].json()
 				bookmarks = await bookmarks[0].json()
 			} catch (err) {
+				if (err.code == 20)
+					return showMessage(
+						'Помилка виконання',
+						"З'єднання було примусово розірвано.<br/>Будь-ласка, повідомте про цю помилку модератору або адміністратору сайта.<br/>Код помилки: 134"
+					)
 				return networkErr(err)
 			}
 
@@ -1476,6 +1477,7 @@ if ('serviceWorker' in navigator)
 						}
 					)
 					suggestionNew.style.display = ''
+					suggestionsLoad.click()
 				}
 				mainSelector.children[1].click()
 				main.scroll({
@@ -1483,6 +1485,7 @@ if ('serviceWorker' in navigator)
 					top:
 						main.scrollTop + mainSelector.getBoundingClientRect().y,
 				})
+				suggestionNew.querySelector('textarea').value = ''
 				suggestionNew.style.display = 'block'
 			})
 			suggestionNew.querySelector('.cancel').onclick = () => {
@@ -1574,7 +1577,7 @@ if ('serviceWorker' in navigator)
 				if (urlParams.get('cookies') == 'set') {
 					showMessage(
 						'Помилка',
-						'Ваш браузер блокує міжсайтові куки.\nБудь-ласка, вимкніть цю функцію.',
+						'Ваш браузер блокує міжсайтові куки.<br/>Будь-ласка, вимкніть цю функцію.',
 						'&#xe908;'
 					)
 				}
@@ -1861,9 +1864,13 @@ if ('serviceWorker' in navigator)
 
 		//* Splitting into three pages
 
-		if (urlParams.get('book') && urlParams.get('page'))
+		if (urlParams.get('book') && urlParams.get('page')) {
 			bookLoader.load(mainLoader)
-		else if (urlParams.get('book')) titleLoader.load(mainLoader)
+			window.addEventListener('resize', () => {
+				mainFooter.style.maxWidth =
+					doc.getBoundingClientRect().width + 'px'
+			})
+		} else if (urlParams.get('book')) titleLoader.load(mainLoader)
 		else catalogLoader.load(mainLoader)
 	})
 })()

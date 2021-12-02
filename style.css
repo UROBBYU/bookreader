@@ -77,7 +77,7 @@ main {
 	background-color: var(--back-color);
 }
 header {
-	z-index: 1;
+	z-index: 3;
 	position: fixed;
 	top: 0;
 	width: 100%;
@@ -970,15 +970,18 @@ h1 {
 	border-radius: 8px;
 }
 main > footer {
-	display: flex;
+	display: none;
 	flex-direction: column;
 	max-width: 850px;
-	width: calc(100vw - 20px);
+	width: 100vw;
 	margin-inline: auto;
 	margin-bottom: 50px;
 	background-color: var(--document-back-color);
 	box-shadow: 0 0 1px 0 var(--shadow-color);
 	opacity: 0;
+}
+.page-reader main > footer {
+	display: flex;
 }
 main > footer > .selector {
 	display: grid;
