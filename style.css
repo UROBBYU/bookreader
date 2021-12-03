@@ -321,7 +321,7 @@ body.theme-paper #theme-switch {
 	display: none;
 }
 #overlay {
-	z-index: 2;
+	z-index: 4;
 	display: grid;
 	grid-template-columns: auto min-content auto;
 	grid-template-rows: auto min-content auto;
