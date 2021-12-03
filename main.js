@@ -564,7 +564,7 @@ if ('serviceWorker' in navigator)
 
 	window.urlParams = new URLSearchParams(location.search)
 
-	if (localStorage.getItem('lastServerConnect') - Date.now() <= 60000)
+	if (Date.now() - localStorage.getItem('lastServerConnect') <= 5 * 60000)
 		window.delayTime = 1000
 	else {
 		window.delayTime = 10000
@@ -1865,7 +1865,10 @@ if ('serviceWorker' in navigator)
 
 			mainLoader = pageLoader()
 
-			if (localStorage.getItem('lastServerConnect') - Date.now() > 60000)
+			if (
+				Date.now() - localStorage.getItem('lastServerConnect') >
+				5 * 60000
+			)
 				localStorage.setItem('lastServerConnect', Date.now())
 		}
 
