@@ -1449,7 +1449,7 @@ if ('serviceWorker' in navigator)
 				})
 				commentNew.querySelector(
 					'textarea'
-				).value += `[u="${sel.serialize(doc)}"]${range.toString()}[/u]`
+				).value += `[q="${sel.serialize(doc)}"]${range.toString()}[/q]`
 			})
 
 			suggestButton.addEventListener(eName, () => {
